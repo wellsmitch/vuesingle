@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script type="text/javascript" src="vue.js"></script>
+    <script type="text/javascript" src="vue-router.js"></script>
+    <script type="text/javascript" src="vuex.min.js"></script>
+</head>
+<body>
+
+<div id="box">
+    <h1>toast</h1>
+    <button @click="tap">点击弹出toast提示框</button>
+</div>
+
+<script type="text/javascript">
+  var Toast =  Vue.component('Toast',{
+        template: `<div class="toast" v-if="isshow">66666666666666666</div>`,
+        data:function () {
+            return {
+                isshow:true,
+                duration:2000
+            }
+        }
+    });
+var toast = function () {
+    let ToastVUe = new Toast({
+        el:document.createElement('div')
+    });
+    document.body.appendChild(ToastVUe.$el);
+    setTimeout(function () {
+        ToastVUe.isshow =false
+    },ToastVUe.duration)
+}
+	var vm = new Vue({
+        el:'#box',
+        data:{
+
+        },
+        methods:{
+            tap(){
+                toast()
+            }
+        }
+
+
+    })
+</script>
+</body>
+</html>
