@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+    //锁定对象中的变量不会被修改******************************************************************Object.freeze
+
+    var obj = { pasta: "spaghetti", length: 10 };
+    // Freeze the object.
+    Object.freeze(obj);
+
+    // Try to add a new property, and then verify that it is not added.
+    obj.newProp = 50;
+    document.write(obj.newProp);// undefined
+
+    // Try to delete a property, and then verify that it is still present.
+    delete obj.length;
+    document.write(obj.length);// 10
+
+    // Try to change a property value, and then verify that it is not changed.
+    obj.pasta = "linguini";
+    document.write(obj.pasta);// spaghetti
+
+
+    // 删除对象中的属性********************************************************************************  delete obj.name;
+
+    function fun(){
+        this.name = 'mm';
+    }
+    var obj = new fun();
+    console.log(obj.name);//mm
+    delete obj.name;
+    console.log(obj.name); //undefined
+
+
+
+</script>
+</html>
