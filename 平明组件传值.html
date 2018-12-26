@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script type="text/javascript" src="vue.js"></script>
+    <script type="text/javascript" src="vue-router.js"></script>
+    <script type="text/javascript" src="vuex.min.js"></script>
+</head>
+<body>
+
+<div id="box">
+    <h1>组件嵌套</h1>
+    <v-a></v-a>
+    <v-b></v-b>
+    <v-c></v-c>
+</div>
+<template id="AAA">
+    <div>
+        <h1>AAA组件</h1>
+        <p></p>
+        <button @click="send()">a按钮</button>
+    </div>
+</template>
+<template id="BBB">
+    <div>
+        <h1>BBB组件</h1>
+        <p></p>
+        <button @click="send()">b按钮</button>
+    </div>
+</template>
+<template id="CCC">
+    <div>
+        <h1>CCC组件</h1>
+        <p>接收AAA的数据---</p>
+        <p>接收BBB的数据---</p>
+        <button>c按钮</button>
+    </div>
+</template>
+<script type="text/javascript">
+    var vm1 = new Vue({});
+
+
+    var vm = new Vue({
+        el:'#box',
+        data:{
+
+        },
+        method:{
+
+        },
+        components:{
+            'v-a':{//尽量使用小写字符 否则有时候会报异常
+                template:'#AAA',
+                data(){
+                    return {
+                        str1:'AAA---'
+                    }
+                },
+                methods:{
+                    send(){
+                        vm1.$emit('isa',this.str1)
+                    }
+
+                }
+            },
+            'v-b':{
+                template:'#BBB',
+                data(){
+                    return {
+                        str2:'BBB---'
+                    }
+                },
+                methods:{
+                    send(){
+                        vm1.$emit('isb',this.str2)
+                    }
+                }
+            },
+            'v-c':{
+                template:'#CCC',
+                data(){
+                    return {
+                        str3:'CCC---'
+                    }
+                },
+                mounted(){
+                  vm1.$on('isa',function (data) {
+                      console.log(data)
+                  });
+                    vm1.$on('isb',function (data) {
+                        console.log(data)
+                    });
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
