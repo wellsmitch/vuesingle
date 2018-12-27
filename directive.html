@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="vue.js"></script>
+</head>
+<body>
+<div id="out">
+    <p v-color>fweagfawtgfewrtgretgetqw3ert4</p>
+    <p v-bac>fw353453453weagfawtgfewrtgretgetqw3ert4</p>
+</div>
+
+<script type="text/javascript">
+    Vue.directive('color',{
+        inserted:function (e) {
+            e.style.color = 'red'
+        }
+    });
+
+var vm = new Vue({
+    el:'#out',
+    directives:{
+        'bac':{
+            inserted:function (a) {
+                a.style.background = 'yellow'
+            }
+        }
+    }
+})
+
+
+</script>
+
+</body>
+</html>
