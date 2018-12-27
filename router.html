@@ -4,28 +4,31 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript" src="vue.js"></script>
-    <script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.min.js"></script>
-    <!--<script type="text/javascript" src="vue-router.js"></script>-->
+    <!--<script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.min.js"></script>-->
+    <script type="text/javascript" src="vue-router.js"></script>
 </head>
 <body>
 <div id="out">
     <h1>路由</h1>
     <router-link to="/home">首页</router-link>
-    <router-link to="/about">关于</router-link>
-    <router-link to="/other">其他</router-link>
+    <router-link to="/about/1">关于</router-link>
+    <router-link :to="{name:'other'}">其他</router-link>
     <!--路由容器-->
     <router-view></router-view>
+    <router-view name="other1"></router-view>
 </div>
 
 <template id="home">
     <div>
         <h1>首页------</h1>
+        <button @click="tap()">tiao</button>
     </div>
 </template>
 
 <template id="about">
     <div>
         <h1>关于-------</h1>
+        <p>{{this.$route.params.id}}</p>
     </div>
 </template>
 
@@ -38,19 +41,26 @@
 <script type="text/javascript">
 
     var Home = {
-        template:'#home'
+        template:'#home',
+        methods:{
+            tap(){
+                router.push('/other')
+            }
+        }
     };
+
     var About = {
         template:'#about'
     };
+
     var Other = {
         template:'#other'
     };
 
     var routes = [
         {path:'/home',component:Home},
-        {path:'/about',component:About},
-        {path:'/other',component:Other},
+        {path:'/about/:id',components:{default:About,'other1':Other}},//两个组件同事加载进来  components:{default:About,'other1':Other}
+        {path:'/qita',name:'other',component:Other},
         {path:'*',redirect:'/home'}
     ];
 
@@ -62,6 +72,7 @@
         el:'#out',
         router:router
     })
+
 </script>
 
 </body>
