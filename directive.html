@@ -7,24 +7,44 @@
 </head>
 <body>
 <div id="out">
-    <p v-color>fweagfawtgfewrtgretgetqw3ert4</p>
-    <p v-bac>fw353453453weagfawtgfewrtgretgetqw3ert4</p>
+    <p v-color.aaa>fweagfawtgfewrtgretgetqw3ert4</p>
+    <p v-bac="str">fw353453453weagfawtgfewrtgretgetqw3ert4</p>
+    <p>{{str}}</p>
+    <button @click="tap">按钮</button>
 </div>
 
 <script type="text/javascript">
-    Vue.directive('color',{
-        inserted:function (e) {
-            e.style.color = 'red'
-        }
-    });
+    // Vue.directive('color',{
+    //     inserted:function (e,a) {//a和arg有关v-color:aaa     modifiers  v-color.aaa
+    //         e.style.color = 'red';
+    //         console.log(a)
+    //     }
+    // });
 
+
+    // Vue.directive('color',function (a,b) {
+    //
+    // });
 var vm = new Vue({
     el:'#out',
+    data:{
+      str:'red'
+    },
     directives:{
         'bac':{
-            inserted:function (a) {
-                a.style.background = 'yellow'
+            inserted:function (a,b) {
+                a.style.background = b.value;
+                console.log(b)
+            },
+            update:function(a,b){
+                console.log(b,'0000');
+                a.style.background = b.value;
             }
+        }
+    },
+    methods:{
+        tap(){
+            this.str = 'green'
         }
     }
 })

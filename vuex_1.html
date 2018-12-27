@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="vue.js"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script>
+</head>
+<body>
+<div id="out">
+    <h1>状态管理器</h1>
+    <h2>{{this.$store.state.count}}</h2>
+
+
+    <button @click="add">增加</button>
+    <button @click="jian">减少</button>
+
+    <v-a></v-a>
+    <v-b></v-b>
+
+</div>
+
+<template id="aa">
+    <div>
+        <p>-aaaa</p>
+    </div>
+</template>
+
+<template id="bb">
+    <div>
+        <p>-bbbbb</p>
+    </div>
+</template>
+<script type="text/javascript">
+    var store = new Vuex.Store({
+        state:{
+            count:0
+        },
+        mutations:{
+            add(a){
+                a.count++
+            },
+            jian(a){
+                a.count--
+            }
+        }
+    });
+
+
+
+		var vm = new Vue({
+            el:'#out',
+            data:{
+
+            },
+            store:store,
+            methods:{
+                add(){
+                    store.commit('add')
+
+                },
+                jian(){
+                    store.commit('jian')
+                }
+            },
+            components:{
+                'v-a':{
+                    template:'#aa'
+                },
+                'v-b':{
+                    template:'#bb'
+                }
+            }
+        })
+</script>
+
+</body>
+</html>
