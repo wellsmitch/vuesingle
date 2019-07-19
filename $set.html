@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="out">
+    <div>
+        <ul>
+            <li v-for="item in arr">{{item}}</li>
+        </ul>
+        <button @click="tap">改变数据</button>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript">
+	var vm = new Vue({
+        el:"#out",
+        data: {
+            arr: ['1111111',22222,333333333]
+        },
+        methods:{
+            tap() {
+                console.log(this.arr[2]);
+                this.arr[0] = 'qqqqqq'
+                // this.$set(this.arr,0,'qqqqqqqqq')
+            }
+        }
+    })
+</script>
+</html>
