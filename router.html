@@ -37,6 +37,7 @@
         <h1>其他--------</h1>
     </div>
 </template>
+<button onclick="tap()">poush</button>
 
 <script type="text/javascript">
 
@@ -56,11 +57,14 @@
     var Other = {
         template:'#other'
     };
+function tap() {
+    routes.push( {path:'/qita',name:'other',component:Other},)
 
+}
     var routes = [
         {path:'/home',component:Home},
         {path:'/about/:id',components:{default:About,'other1':Other}},//两个组件同事加载进来  components:{default:About,'other1':Other}
-        {path:'/qita',name:'other',component:Other},
+
         {path:'*',redirect:'/home'}
     ];
 
@@ -71,8 +75,8 @@
     var vm = new Vue({
         el:'#out',
         router:router
-    })
-
+    });
+    //   $.ajax  jsonp  axios  fetch  es5 es6  es10
 </script>
 
 </body>
